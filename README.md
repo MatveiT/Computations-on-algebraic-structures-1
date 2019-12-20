@@ -4,7 +4,7 @@
 
 In the article [1]:
 
-**... Name and complete reference to the article ...**
+**X. García-Martínez, M. Tsishyn, T. Van der Linden and C. Vienne, A characterisation of Lie algebras via action representability**
 
 we have encountered the need to determine a system of equations that is used to complete our proof. The computations required to arrive to this system of equations are, in a certain extent, repetitive and long enough to convince us that the best way to compute the equations is by the use of a computer.
 
