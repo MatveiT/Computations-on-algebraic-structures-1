@@ -1,6 +1,6 @@
 
 // -----------------------------------------------------------------------------
-// First we export the needed classes to run out code --------------------------
+// First we export the classes, needed to run our code --------------------------
 const Field = require('./script.js').Field;
 const Action = require('./script.js').Action;
 const Monomial = require('./script.js').Monomial;
@@ -9,7 +9,7 @@ const Expression = require('./script.js').Expression;
 
 // -----------------------------------------------------------------------------
 // Usage of class Field --------------------------------------------------------
-// Field elements are initialiezd with a non-empty string
+// Field elements are initialized with a non-empty string
 
 var k1 = new Field('mu1');            // declare new field element with value mu1
 var k2 = new Field('mu2');            // declare new field element with value mu2
@@ -33,7 +33,7 @@ k1 = k1.negative()                    // compute the negative of a field element
 
 var action = new Action(2)            // initialize an action element
 //console.log(action.value)             // 2   display the value of the action element
-//console.log(action.read)              // b*  display the value of the action with the notaitons of the article
+//console.log(action.read)              // b*  display the value of the action with the notations of the article
 
 
 // -----------------------------------------------------------------------------
@@ -81,7 +81,7 @@ var X = new Monomial({ K: new Field('1'), letter: 1, ind: [], exp: []});        
 var a1 = new Action(1), a2 = new Action(2), a3 = new Action(3);                 // initialize 3 actions elements
 var exp1 = new Expression([[a1, X], a2])                                        // initialize an expression of degree 3
 var exp2 = new Expression([[[a1, a2], a3], X])                                  // initialize an expression of degree 4
-var p = exp1.equations()                                                        // compute the equations on K that emerges from this expresion
+var p = exp1.equations()                                                        // compute the equations on K that emerges from this expression
 //console.log(p.read)
 
 
@@ -95,7 +95,7 @@ var p = exp1.equations()                                                        
 // RESULTS ---------------------------------------------------------------------
 // Here we show how we get the equations on the field K that are used in the article
 
-// Initialize X (a monomial in the Algebra) and actions b, b* and b** ----------------------------------------------
+// Initialize X (a monomial in the algebra) and actions b, b* and b** ----------------------------------------------
 var X = new Monomial({K: new Field('1'), letter: 1, ind: [], exp: []});
 var a1 = new Action(1), a2 = new Action(2), a3 = new Action(3);
 
@@ -114,7 +114,7 @@ const expressions = [
 
 // Compute the results --------------------------------------------------------------------------------------------
 // For each expression we derive a polynomial P (on the algebra A) that is equal to zero on A
-// Then for each polynomial P, we derive a system of equations on K that is equal to zero by taking the coefficielt of base vectors of P
+// Then for each polynomial P, we derive a system of equations on K that is equal to zero by taking the coefficient of base vectors of P
 
 let results = {};
 expressions.forEach(d =>{
@@ -146,13 +146,13 @@ expressions.forEach(d =>{
 //};
 
 // Print the results ----------------------------------------------------------------------------------------------
-// Print the results by deleting the symbols '//' before on of the two the console.log() function to print the result in the terminal
+// Print the results by deleting the symbols '//' before one of the two the console.log() functions
 
 // 1) Here we can display the object results in the terminal
 
 //console.log(results);
 
-// 2) Here we can display just the set of equation on K equal to zero used in the article.
+// 2) Here we can display just the set of equations on K, equal to zero, used in the article.
 
 for(let d in results){
     for(let dd in results[d]){

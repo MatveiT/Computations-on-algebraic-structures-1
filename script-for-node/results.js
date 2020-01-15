@@ -60,13 +60,13 @@ expressions.forEach(d =>{
 //};
 
 // Print the results ----------------------------------------------------------------------------------------------
-// Print the results by deleting the symbols '//' before one of the two console.log() functions below in order to print the result in the terminal
+// Print the results by deleting the symbols '//' before one of the two console.log() functions below
 
 // 1) Here we can display the object results in the terminal
 
 //console.log(results);
 
-// 2) Here we can display just the set of equations on K equal to zero used in the article.
+// 2) Here we can display just the set of equations on K, equal to zero, used in the article.
 
 for(let d in results){
     for(let dd in results[d]){

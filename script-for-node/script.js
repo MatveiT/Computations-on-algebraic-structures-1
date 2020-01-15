@@ -9,9 +9,9 @@ class Field {
     // Creation of a new element of the class Field ---------------------------------------------------------------
     constructor(string = '1'){
         if(typeof string === 'string' && string !== ''){ // only string are accepted as input for construct the element
-            // hide the data in element.state, this allow to prevent forbidden manual modification of the object
+            // hide the data in element.state, this prevents forbidden manual modification of the object
             this.state = {
-                type: 'field',                     // different classes are distinguished by their type
+                type: 'field',                     // different classes are distinguished by their types
                 value: string                      // the value of the field element
             };
         }else{console.log('ERROR F.1: Forbidden field element declaration'); return};
@@ -34,7 +34,7 @@ class Field {
     };
     // Compute the product of two field elements ------------------------------------------------------------------
     prod(mu1, mu2){
-        // firest we check that the input is allowed for field product
+        // first we check that the input is allowed for field product
         if(mu1.type === 'field' && mu2.type === 'field'){
             let out = new Field();                 // create a empty field element
             if(mu1.value === '0' || mu2.value === '0'){
@@ -44,7 +44,7 @@ class Field {
             }else if(mu2.value === '1'){
                 out.update(mu1.value);             // case when one element is unit
             }else{                                 // general case
-                // here we add some parentheses if needed to avoid mistakes in order of operations
+                // here we add some parentheses, if needed, to avoid mistakes in order of operations
                 let m1 = '', m2 = '';
                 if(mu1.value.includes('+') || mu1.value.includes('-')){
                     m1 = '(' + mu1.value + ')';
@@ -59,7 +59,7 @@ class Field {
                 out.update( '(' + m1 + '*' + m2 + ')' );
             };
             return out;
-        }else{console.log('ERROR F.3: poruct on field require two field element arguments'); return};
+        }else{console.log('ERROR F.3: product on field requires two field element arguments'); return};
     };
     // Compute the sum of two field elements ----------------------------------------------------------------------
     sum(mu1, mu2){
@@ -75,7 +75,7 @@ class Field {
                 out.update(mu1.value + '+' + mu2.value);
             };
             return out;
-        }else{console.log('ERROR F.4: sum on field require two field element arguments'); return};
+        }else{console.log('ERROR F.4: sum on field requires two field element arguments'); return};
     };
     // Return the nagative of the element value -------------------------------------------------------------------
     negative(input = this.state.value){
@@ -127,7 +127,7 @@ class Action {
     // Create a new action element --------------------------------------------------------------------------------
     constructor(a){
         if(a === 1 || a === 2 || a === 3){         // forbid wrong initializations of action element
-            // hide the data in element.state, this allow to prevent forbidden manual modification of the object
+            // hide the data in element.state, this prevents forbidden manual modification of the object
             this.state = {
                 type: 'action',                    // different classes are distinguished by their type
                 value: a                           // the value of the action element
@@ -154,7 +154,7 @@ class Action {
 /*
 var action = new Action(2)            // initialize an action element
 console.log(action.value)             // 2   display the value of the action element
-console.log(action.read)              // b*  display the value of the action with the notaitons of the article
+console.log(action.read)              // b*  display the value of the action with the notations of the article
 */
 
 // CLASS: Monomial -------------------------------------------------------------------
@@ -162,14 +162,14 @@ console.log(action.read)              // b*  display the value of the action wit
 // ---------------------------------------------------------------------------------
 // Define a class for monomial element from the algebra A
 // Initialization with an object  O = {K: ..., letter: ..., exp: ..., ind: ...} or nothing
-// It handle vorious operations as action, scalar product, but only restrained on monomials
-// To represent base vector letter we use numbers as X => 1, Y => 2, Z => 3 and T => 4
+// It handles various operations such as action, scalar product, but restricted monomials
+// To represent base vector letter we use numbers as follows: X => 1, Y => 2, Z => 3 and T => 4
 
 class Monomial {
     // Create a new monomial element from algebra -----------------------------------------------------------------
     constructor(value = this.zero.value){
-        if(this.isValidValue(value)){              // check if the input is correct to creat an albegra element
-            // hide the data in element.state, this allow to prevent forbidden manual modification of the object
+        if(this.isValidValue(value)){              // check if the input is correct to create an algebra element
+            // hide the data in element.state, this prevents forbidden manual modification of the object
             this.state = {
                 type: 'monomial',                  // different classes are distinguished by their type
                 value: value                       // the value of the monomial element
@@ -209,7 +209,7 @@ class Monomial {
     get type(){
         return this.state.type;
     };
-    // Output the baseVector that represents the monomial (the monomial without the field element) ----------------
+    // Output the base vector that represents the monomial (the monomial without the field element) ----------------
     // gives a unique string identifier for the base vector of the monomial
     get baseVector(){
         let a = this.state.value;
@@ -227,7 +227,7 @@ class Monomial {
         if(this.isZero(a)){string = '0'};
         return string;
     };
-    // Output an easy readable string representing the monomial ---------------------------------------------------
+    // Output an easily readable string representing the monomial ---------------------------------------------------
     get read(){
         let a = this.state.value;
         let string = '';
@@ -342,7 +342,7 @@ class Monomial {
     };
     // Method to multiply a monomial by a field element ----------------------------------------------------------
     scalarMult(e1, e2){
-        // Firest check if the types are ok and their respective positions in arguments
+        // First check if the types are okay and their respective positions in arguments
         if(e1.type === 'field' && e2.type === 'monomial'){
             var field = e1, algebra = e2;
         }else if(e1.type === 'monomial' && e2.type === 'field'){
@@ -430,17 +430,17 @@ console.log(a.readExpression)               // (b**((Xb)b*)) Read the expression
 // ---------------------------------------------------------------------------------
 // Define a class for handle polynomial element from the algebra A
 // Initialization with an array of Monomial objects
-// Its value is a map from the base vectors string notations to the corresponding monomials
+// Its value is a map from the base vector string notations to the corresponding monomials
 
 class Polynomial {
-    // Create a new polynomail element from algebra ---------------------------------------------------------------
+    // Create a new polynomial element from algebra ---------------------------------------------------------------
     constructor(array = []){
         // verify if the array is an array of monomials
-        if(!Array.isArray(array)){console.log('ERROR P.1: wrong initialization entry for polynomal object'); return};
+        if(!Array.isArray(array)){console.log('ERROR P.1: wrong initialization entry for polynomial object'); return};
         array.forEach(d => {
-            if(d.type !== 'monomial'){console.log('ERROR P.2: wrong initialization entry for polynomal object'); return};
+            if(d.type !== 'monomial'){console.log('ERROR P.2: wrong initialization entry for polynomial object'); return};
         });
-        // hide the data in element.state, this allow to prevent forbidden manual modification of the object
+        // hide the data in element.state, this prevents forbidden manual modification of the object
         this.state = {
             type: 'polynomial',                                 // different classes are distinguished by their type
             value: new Map()                                    // initiate a polynomial value with an empty map
@@ -448,12 +448,12 @@ class Polynomial {
         // add each element of the array to the polynomial
         this.add(array);
     };
-    // Add an array of monomials to the polynomails element -------------------------------------------------------
+    // Add an array of monomials to the polynomials element -------------------------------------------------------
     add(array){
         // verify if the array is an array of monomials
-        if(!Array.isArray(array)){console.log('ERROR P.3: wrong initialization entry for polynomal object'); return};
+        if(!Array.isArray(array)){console.log('ERROR P.3: wrong initialization entry for polynomial object'); return};
         array.forEach(d => {
-            if(d.type !== 'monomial'){console.log('ERROR P.4: wrong initialization entry for polynomal object'); return};
+            if(d.type !== 'monomial'){console.log('ERROR P.4: wrong initialization entry for polynomial object'); return};
         });
         // add each element of the array to the polynomial
         array.forEach(d => {
@@ -462,7 +462,7 @@ class Polynomial {
                 if(this.value.has(baseVector)){
                     let initialMon = this.value.get(baseVector);          // initial monomial of this baseVector
                     let value = {};                                       // create an empty value
-                    value.K = Field.prototype.sum(initialMon.K, d.K);     // add the new field element to the inital monomial
+                    value.K = Field.prototype.sum(initialMon.K, d.K);     // add the new field element to the initial monomial
                     value.letter = d.letter;                              // the .letter value stay unchanged
                     value.exp = d.exp;                                    // the .exp value stay unchanged
                     value.ind = d.ind;                                    // the .ind value stay unchanged
@@ -494,7 +494,7 @@ class Polynomial {
 
 // -----------------------------------------------------------------------------
 // Usage of class Polynomial ---------------------------------------------------
-// Initialized with an array of monomials objects
+// Initialized with an array of monomial objects
 /*
 var k = new Field('mu');                      // initialize a field object
 var a1 = new Monomial({K: k, letter: 3, ind: ['r','r'], exp: [1,2]});  // initialize a monomial object
@@ -524,7 +524,7 @@ class Expression {
                 value: array,                                       // initiate a polynomial value with an empty map
                 degree: degree                                      // degree of expression is 3 or 4
             };
-        }else{console.log('ERROR E.1: invalid entree for expression initialization'); return};
+        }else{console.log('ERROR E.1: invalid entry for expression initialization'); return};
     };
     // Allow direct and more intuitive access to data stored the object.state -------------------------------------
     get type(){
@@ -552,7 +552,7 @@ class Expression {
         };
         return string;
     };
-    // Function to compute recurcively the depth of nested arrays -----------------------------------------------
+    // Function to recursively compute the depth of nested arrays -----------------------------------------------
     // X => 0, [X,X] => 1,  [X, [X]] => 2,  [X, [X, [X,X]]] => 3
     depth(array, level = 0){
         let newArray = [];
@@ -621,7 +621,7 @@ class Expression {
         }else{console.log('input should be array');return false};
     };
     // ---------------------------------------------------------------------------------------------------------
-    // recurcive product function on arrays that solve the product on types: monomial, field, action
+    // recursive product function on arrays that solve the product on types: monomial, field, action
     // Example: [ k1, [[X, action1, k2], [action2, k2]] ]
     // where k1 and k2 are in K, action1 and action2 are action element and X is a monomial of A
     product(array = this.state.value){
@@ -630,7 +630,7 @@ class Expression {
         let n = array.length;
         for(let i = 0; i < n; i++){
             if(Array.isArray(array[i])){
-                newArray[i] = this.product(array[i]);     // Recurcively replace each array by the value of the product it defines
+                newArray[i] = this.product(array[i]);     // Recursively replace each array by the value of the product it defines
             }else{
                 newArray[i] = array[i];
             };
@@ -659,7 +659,7 @@ class Expression {
             })
             if(algebraEl.length === 1 && monomial.length === 1){         // case when: [k,k,X,k] or [X] (no action)
                 return Monomial.prototype.scalarMult(fieldEl, algebraEl[0]);
-            }else if(algebraEl.length === 0){                            // case when [k,k,k,k] (no action niether monomials)
+            }else if(algebraEl.length === 0){                            // case when [k,k,k,k] (no action neither monomials)
                 return fieldEl;
             }else if(monomial.length === 1){                             // general case: [k,act,X,act,k,k]
                 monomial = monomial[0];
@@ -668,7 +668,7 @@ class Expression {
                     if(beforeMonomial && d.type === 'action'){           // compute left action
                         monomial = Monomial.prototype.action(d, monomial);
                     }else if(d.type === 'monomial'){
-                        beforeMonomial = false;                          // set that the follownig action will be right actions action
+                        beforeMonomial = false;                          // set that the following action will be right actions action
                     }else if(!beforeMonomial && d.type === 'action'){    // compute right action
                         monomial = Monomial.prototype.action(monomial, d);
                     };
@@ -680,7 +680,7 @@ class Expression {
     };
     // ------------------------------------------------------------------------------------------------------------
     // Define a function that compute the identity
-    // imput objects: [[X,Y],Z] or [X,[Y,Z]] where X, Y and Z are any objects
+    // input objects: [[X,Y],Z] or [X,[Y,Z]] where X, Y and Z are any objects
     // output the array that represents the terms of the identity
     // output example: [[mu1, expression], [mu2, expression], ..., [mu8, expression]]
     identity(input, fieldElement = new Field('1')){
@@ -702,10 +702,10 @@ class Expression {
             });
             //case when [[X,Y],Z] so the field coefficients are mu1, ..., mu8
             if(array[0].length === 2 && array[1].length === 1){
-                coefficientLetter = 'mu';      // define the coeffcient letter
+                coefficientLetter = 'mu';      // define the coefficient letter
             // case when [X,[Y,Z]] so the field coefficients are lambda1, ..., lambda8
             }else if(array[0].length === 1 && array[1].length === 2){
-                coefficientLetter = 'lambda';  // define the coeffcient letter
+                coefficientLetter = 'lambda';  // define the coefficient letter
                 // here we inverse the two elements of the array
                 let mem = array[0]; array[0] = array[1]; array[1] = mem;
             }else{console.log('ERROR E.4: invalid array lengths for identity');return};
@@ -732,9 +732,9 @@ class Expression {
     // Expand degree tree expression on the right side ------------------------------------------------------------
     treeFactorsRightExpansion(array = this.state.value){
         let polynomial = new Polynomial();                  // create a new empty polynomial
-        // first expantion ------------------------------------------------------------------------------------------
+        // first expansion ------------------------------------------------------------------------------------------
         let firstExp = this.identity(array);                // apply the identity on the expression
-        // second expantion -----------------------------------------------------------------------------------------
+        // second expansion -----------------------------------------------------------------------------------------
         firstExp.forEach( (d) => {
             // find the part of length 2:  [*,*]
             let lengthTwoElement = {};
@@ -761,9 +761,9 @@ class Expression {
     // Expand degree four expression on the left side -------------------------------------------------------------
     fourFactorsLeftExpansion(array = this.state.value){
         let polynomial = new Polynomial();
-        // first expantion ------------------------------------------------------------------------------------------
+        // first expansion ------------------------------------------------------------------------------------------
         let firstExp = this.identity(array);                // apply the identity on the expression
-        // second expantion -----------------------------------------------------------------------------------------
+        // second expansion -----------------------------------------------------------------------------------------
         firstExp.forEach( (d) => {
             if(d[1].length === 2 && d[2].length === 2){
                 // CASE 1 -------------------------------------------------------------------------
@@ -810,7 +810,7 @@ class Expression {
     // Expand degree four expression on the right side -------------------------------------------------------------
     fourFactorsRightExpansion(array = this.state.value){
         let polynomial = new Polynomial();
-        // first expantion ------------------------------------------------------------------------------------------
+        // first expansion ------------------------------------------------------------------------------------------
         // we expand the term [A, [A, A]] and the the term X alone in [[A, [A, A]], X]
         let firstExp = [];
         if(array[0].length === 2){
@@ -824,8 +824,8 @@ class Expression {
                 firstExp.push([Monomial.prototype.scalarMult(array[0], d[0]), [d[1], d[2]] ]);
             });
         };
-        // second expantion -----------------------------------------------------------------------------------------
-        // Now we have 8 terms like [K, [A, [A, A]], X] and we just apply the left expantion to each term
+        // second expansion -----------------------------------------------------------------------------------------
+        // Now we have 8 terms like [K, [A, [A, A]], X] and we just apply the left expansion to each term
         firstExp.forEach( (d) => {
             let exp = this.fourFactorsLeftExpansion(d);
             exp.value.forEach( (v, k) => {
@@ -834,7 +834,7 @@ class Expression {
         });
         return polynomial;
     };
-    // Right Expantion ----------------------------------------------------------------------------------------------
+    // Right expansion ----------------------------------------------------------------------------------------------
     rightExpansion(array = this.state.value){
         if(this.degree === 3){
             return this.treeFactorsRightExpansion(array);
@@ -842,7 +842,7 @@ class Expression {
             return this.fourFactorsRightExpansion(array);
         };
     };
-    // Left Expantion ---------------------------------------------------------------------------------------------
+    // Left expansion ---------------------------------------------------------------------------------------------
     leftExpansion(array = this.state.value){
         if(this.degree === 3){
             return this.treeFactorsLeftExpansion(array);
@@ -881,14 +881,14 @@ var X = new Monomial({ K: new Field('1'), letter: 1, ind: [], exp: []});        
 var a1 = new Action(1), a2 = new Action(2), a3 = new Action(3);                 // initialize 3 actions elements
 var exp1 = new Expression([[a1, X], a2])                                        // initialize an expression of degree 3
 var exp2 = new Expression([[[a1, a2], a3], X])                                  // initialize an expression of degree 4
-var p = exp1.equations()                                                        // compute the equations on K that emerges from this expresion
+var p = exp1.equations()                                                        // compute the equations on K that emerges from this expression
 console.log(p.read)
 */
 
 
 // ----------------------------------------------------------------------------------------------------------------
 // We export the previously defined classes -----------------------------------------------------------------------
-// To allow more easy access for person that are not userd to Node.js, we use JavaScript-5 export/import grammar
+// To allow easier access for those not used to Node.js, we employ JavaScript-5 export/import grammar
 
 module.exports.Field = Field;
 module.exports.Action = Action;
