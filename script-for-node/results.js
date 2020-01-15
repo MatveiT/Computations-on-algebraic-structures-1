@@ -1,14 +1,14 @@
 // RESULTS ---------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 
-// First we export the needed classes to run out code --------------------------
+// First we export the needed classes to run our code --------------------------
 const Field = require('./script.js').Field;
 const Action = require('./script.js').Action;
 const Monomial = require('./script.js').Monomial;
 const Polynomial = require('./script.js').Polynomial;
 const Expression = require('./script.js').Expression;
 
-// Initialize X (a monomial in the Algebra) and actions b, b* and b** ----------------------------------------------
+// Initialize X (a monomial in the algebra) and actions b, b* and b** ----------------------------------------------
 const X = new Monomial({K: new Field('1'), letter: 1, ind: [], exp: []});
 const a1 = new Action(1), a2 = new Action(2), a3 = new Action(3);
 
@@ -39,8 +39,8 @@ expressions.forEach(d =>{
     });
 });
 
-// the object 'results' contains all the equations we wanted to compute
-// The output 'result', is structured as following:
+// The object 'results' contains all the equations we wanted to compute.
+// The output 'result' is structured as follows:
 
 //result = {
 //  expression1: {
@@ -60,13 +60,13 @@ expressions.forEach(d =>{
 //};
 
 // Print the results ----------------------------------------------------------------------------------------------
-// Print the results by deleting the symbols '//' before on of the two the console.log() function to print the result in the terminal
+// Print the results by deleting the symbols '//' before one of the two console.log() functions below in order to print the result in the terminal
 
 // 1) Here we can display the object results in the terminal
 
 //console.log(results);
 
-// 2) Here we can display just the set of equation on K equal to zero used in the article.
+// 2) Here we can display just the set of equations on K equal to zero used in the article.
 
 for(let d in results){
     for(let dd in results[d]){
