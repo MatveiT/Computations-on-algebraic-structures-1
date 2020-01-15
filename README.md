@@ -274,7 +274,7 @@ var k1 = new Field('1');                      // create a new field element
 var k2 = new Field('mu');                     // create a new field element
 var action = new Action(3);                   // initialize an action element
 var value = {                                 // this kind of objects is used to initialize monomial element
-    K: k1,                                    // must contain a field element in K
+    K: k1,                                    // must contain a field element in .K
     letter: 3,                                // must contain a numeric element of 1, 2 , 3 or 4 in .letter (X => 1, Y => 2, Z => 3, T => 4)
     ind: ['r','r'],                           // must contain an array of string 'l' or 'r' in .ind ('l' for left and 'r' for right)
     exp: [1,2]                                // must contain an array of integers between 1, 2 and 3 in .exp
