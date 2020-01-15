@@ -6,27 +6,27 @@ In the article
 
 **[1] X. García-Martínez, M. Tsishyn, T. Van der Linden and C. Vienne, A characterisation of Lie algebras via action representability**
 
-we have encountered the need to determine a system of equations that is used to complete the proof of one of the main results. The inconsistency of this system proves that the result is valid. The computations required to arrive to this system of equations are, in a certain extent, repetitive and long enough to convince us that the best way to compute the equations is by the use of a computer.
+we have encountered the need to determine a system of equations that is used to complete the proof of one of the main results. The inconsistency of this system proves that the result is valid. The computations required to arrive to this system of equations are, in a certain extent, repetitive and long enough to convince us that the best way to obtain the equations is by the use of a computer.
 
-So, the **purpose** of this project is to **generate the system of equations used in [1]**. This project is written is a such way that any person is able to replicate our computations and verify the correctness of this code. We also did our best to make the code, or at least its usage, understandable also for those who are less familiar with programming.
+So, the **purpose** of this project is to **generate the system of equations used in [1]**. This project is written is a such way that anyone can replicate our computations and verify the correctness of this code. We also did our best to make the code, or at least its usage, understandable for those who are less familiar with programming.
 
 #### 1.1) Choice of the language
 
-This project is written in **JavaScript**, version 6 (**ES6**). JavaScript may not be the usual choice for this kind of algebraic computations. Languages such as Wolfram Mathematica are more adapted to symbolic manipulation of systems of equations. However we choose to us JavaScript for the two following reasons:
-- the algebraic structures we have to manipulate are very specific to this article, and we wanted to keep full control on what exactly the code is doing, to be completely sure of the result;
+This project is written in **JavaScript**, version 6 (**ES6**). JavaScript may not be the usual choice for this kind of algebraic computations. Languages such as Wolfram Mathematica are more adapted to symbolic manipulation of systems of equations. However, we chose to use JavaScript for the two following reasons:
+- the algebraic structures we have to manipulate are very specific to this article, and we wanted to keep full control of what exactly the code is doing, to be completely sure of the result;
 - the use of JavaScript allows anyone to test the code: no need for a license.
 
 #### 1.2) Disclaimer
 
-The purpose of this code is to generate a specific type of equations obtained from a specific type of expressions on specific algebraic structures (as described in the article [1]). So, there is absolutely no guarantee that it will give correct results in any other context. Knowing that, this code should not be used for any other purpose than the generation of equations in the context of the article [1], save by users who are totally aware of what they are doing.
+The purpose of this code is to generate a specific type of equations obtained from a specific type of expressions on specific algebraic structures, as described in the article [1]. So, there is absolutely no guarantee that it will give correct results in any other context. Knowing that, this code should not be used for any other purpose than the generation of equations in the context of the article [1], save by users who are totally aware of what they are doing.
 
 # 2) How to use
 
 In (2.1), we explain two ways this code can be run:
   - in an on-line JavaScript editor;
-  - by executing a JavaScript project locally on your computer with Node, a classical way to execute JS files.
+  - by executing a JavaScript project locally on your computer by means of Node.js, a classical way to execute JS files.
 
-This first option does not require any modifications of the code files. In the second case, some lines must be uncommented, in order to choose the way the output is presented.
+The first option does not require any modification of the code files. In the second case, some lines must be uncommented, in order to choose the way the output is presented.
 
 In (2.2), we explain how the code can be used to obtain the set of equations in question. Furthermore, users can themselves obtain the equations they want by modifying or adding lines of code in the right place.
 
@@ -34,18 +34,17 @@ In (2.2), we explain how the code can be used to obtain the set of equations in 
 
 We adapted the code to two different environments.
 
-**2.1.1) Online execution**
+**2.1.1) On-line execution**
 
   The simplest way:
   Without any required installation on your computer, you can simply copy and paste the content of the file 'JScode.txt' (folder './online-execution/') in any JavaScript on-line editor (such as for instance 'https://playcode.io/online-javascript-editor'). Then, the system of equations will be displayed in the terminal.
 
 **2.1.2) Execution in Node.js**
 
-  For 'Node.js' users,
-  To run JavaScript locally on you computer, you need **Node.js** to be installed. Then you can just execute the content of the folder './script-for-node/' to obtain the results.
+  For 'Node.js' users, to run JavaScript locally on your computer, you first need to install **Node.js**. Then you can execute the content of the folder './script-for-node/' to obtain the results.
   - The file 'script.js' defines the main code needed to obtain the equations from a given expression.
   - The file 'usage.js' shows how to use the code from 'script.js'
-  - The file 'results.js' defined the eight expressions $e_1, ..., e_8$ and uses 'script.js' to obtain the wanted system of expressions.
+  - The file 'results.js' defines the eight expressions $e_1$, ..., $e_8$ and uses 'script.js' to obtain the wanted system of expressions.
 
   To obtain the results, first uncomment the relevant lines in the file 'results.js', then execute it in the folder './script-for-node/', using the command line as follows.
   ```
@@ -59,44 +58,44 @@ Once it is clear how to execute the code, here is a short explanation of the par
 - with (2.1.1): at the end of the text document './online-execution/JScode.txt';
 - with (2.1.2): in the file './script-for-node/results.js'.
 
-First, you have to define `k` the unit on the field $K$.
+First, we define `k` the unit of the field $K$.
 ```
 const k = new Field('1');
 ```
-Then, define `a1`, `a2` and `a3` as the three elements $b$, $b'$ and $b''$ that act on $A$.
+Then, we define `a1`, `a2` and `a3` as the three elements $b$, $b'$ and $b''$ that act on $A$.
 ```
 const a1 = new Action(1), a2 = new Action(2), a3 = new Action(3);
 ```
-Then, define the monomial element `X` that represents $X \in A$.
+Then, we define the monomial element `X` that represents $X \in A$.
 ```
 const X = new Monomial({K: k, letter: 1, ind: [], exp: []});
 ```
-Then, define the expression from which we want to derive the equations. For example `[[[a1,a2], a3], X]` represents $((b \cdot b') \cdot b'') \cdot X$
+Then, we define the expression from which we want to derive the equations. For example `[[[a1,a2], a3], X]` represents $((b \cdot b') \cdot b'') \cdot X$
 ```
 const myExpression = new Expression([[[a1,a2], a3], X])
 ```
-Finally, to obtain the polynomial $P$ on $A$ from this expression, just use the method `.equations()` of the class `Expression`.
+Finally, to obtain the polynomial $P$ on $A$ from this expression, we use the method `.equations()` of the class `Expression`.
 ```
 let polynomial = myExpression.equations()
 ```
-You can display the whole polynomial $P$ by using
+We can display the whole polynomial $P$ by using
 ```
 console.log(polynomial.read)
 ```
-Or you can display the equations on $K$ that are equal to zero obtained from the expression `myExpression` as
+Or we can display the equations on $K$ that are equal to zero obtained from the expression `myExpression` as
 ```
 polynomial.value.forEach( v => {
     console.log(v.value.K.value);
 });
 ```
 
-More detailed usage of the code is shown in './script-for-node/usage.js' or in part (5).
+More detailed usage of the code is explained in './script-for-node/usage.js' and in part (5).
 
 
 # 3) Results
 The folder './results/' contains two files:
-- 'results.txt': is a text file whose lines represent the equations on $K$ that are equal to zero obtained from the eight expressions $e_1$, ..., $e_8$.
-- 'results.json' is a JSON file (JavaScript Object Notations) which is an object that gives all the equations and also the information of from which expression it comes and of which base vector it is the coefficient.
+- 'results.txt': a text file whose lines represent the equations on $K$ that are equal to zero obtained from the eight expressions $e_1$, ..., $e_8$.
+- 'results.json': a JSON (JavaScript Object Notations) file, which is an object that gives all the equations together with the information from which expression each equation comes, as well as which base vector it is the coefficient of.
 
 # 4) A brief explanation of the theoretical context
 
@@ -105,13 +104,13 @@ A complete and rigorous theoretical context of this code is explained in [1]. Ho
 #### 4.1) Notations and definitions of algebraic structures
 
 Let us consider a field $K$ and an algebra $A$ over $K$.
-A basis of $A$ is defined as,  
+A basis of $A$ is defined as 
 
 $B = \{ X, Y^{i}\_{p_1}, Z^{j,k}\_{p_2, p_3}, T^{l,m,n}\_{p_4, p_5, p_6} \}$, 
 
-where $p_1, ..., p_6$ are in the set $\{ left, right \}$ and $i,j,k,l,m,n$ are in the set $\{ 1,2,3 \}$. Moreover, if $j = k$, the element $Z^{i,k}\_{p_2, p_3}$ is zero and if $l$, $m$ and $n$ are not two by two different, the element $T^{l,m,n}\_{p_4, p_5, p_6}$ is also zero.
+where $p_1$, ..., $p_6$ are in the set $\{ left, right \}$ and $i$, $j$, $k$, $l$, $m$, $n$ are in the set $\{ 1,2,3 \}$. Moreover, if $j = k$, then the element $Z^{i,k}\_{p_2, p_3}$ is zero and if $l$, $m$ and $n$ are not two by two different, then the element $T^{l,m,n}\_{p_4, p_5, p_6}$ is also zero.
 
-Now, we define an action of tree elements $b$, $b'$ and $b''$ (alternatively denoted as $b_1$, $b_2$ and $b_3$) on $A$ as $\{b, b', b''\} \times A \rightarrow A$ such that,
+Now, we define an action of three elements $b$, $b'$ and $b''$ (alternatively denoted as $b_1$, $b_2$ and $b_3$) on $A$ via $\{b, b', b''\} \times A \rightarrow A$ such that
 
 $b_t \cdot X = Y^{t}\_{left} $
 
@@ -121,11 +120,12 @@ $b_t \cdot Z^{j,k}\_{p_2, p_3} = T^{j,k,t}\_{p_2,p_3, left} $
 
 $b_t \cdot T^{l,m,n}\_{p_4, p_5, p_6} = 0$
 
-for any $t$, $i$, $j$, $k$, $l$, $m$, $n$ in $\{1,2,3 \}$ and $p_1$, $p_2$, $p_3$, $p_4$, $p_5$, $p_6$ in $\{ left, right \}$ and the same equations holds for right actions but with the new index coefficient as $right$ instead of $left$.
+for any $t$, $i$, $j$, $k$, $l$, $m$, $n$ in $\{1,2,3 \}$ and $p_1$, $p_2$, $p_3$, $p_4$, $p_5$, $p_6$ in $\{ left, right \}$. The same equations hold for right actions, but with the new index coefficient $right$ instead of $left$.
 
-#### 4.2) Method to find the equations
+#### 4.2) Method for finding the equations
 
 Now we consider the eight following algebraic expressions:
+
 $e_1 = (b' \cdot X)\cdot b$,
 
 $e_2 = (X \cdot b')\cdot b$,
@@ -142,36 +142,36 @@ $e_7 = X \cdot (b\cdot(b' \cdot b''))$
 
 and $e_8 = X \cdot ((b \cdot b') \cdot b'')$.
 
-Note that the expressions $e_5$, $e_6$, $e_7$ and $e_8$ have no meaning in the context of the algebra $A$ alone. However, they can be defined in an extended algebraic structure built on the top of $A$ (exact definition in [1]).
+Note that the expressions $e_5$, $e_6$, $e_7$ and $e_8$ have no meaning in the context of the algebra $A$ alone. However, they can be defined in an extended algebraic structure built on the top of $A$ (whose exact definition is given in [1]).
 
-Then, each of these expressions $e_i$ (for $i=1, ..., 8$) is expanded in two different ways by the use of the **identity** (exact formula of the identity in [1]) and the two expansions are transferred to the same side of the equality so that we obtain a polynomial $P_i$ on $A$ that is equal to zero. The polynomial $P_i$ can be written as,
+Then, each of these expressions $e_i$ (for $i=1, ..., 8$) is expanded in two different ways by the use of the **identity** (exact formula of the identity in [1]) and the two expansions are transferred to the same side of the equality, so that we obtain a polynomial $P_i$ on $A$ that is equal to zero. The polynomial $P_i$ can be written as
 
-$P_i = \sum_{ V \in B} k_{(i, V)} V $ = 0,
+$P_i = \sum_{ V \in B} k_{(i, V)} V = 0$,
 
 where $k_{(i,V)}$ are in $K$ and V are the elements of the basis $B$.
 
-So, we can conclude that the system of equations on $K$,  $\{ k_{(i,V)} \}\_{i \in \{1,..., 8 \}, V \in B}$ is equal to zero (note that some of these equations are just $0=0$).
+Thus we obtain a system of equations on $K$,  $\{ k_{(i,V)}=0 \}\_{i \in \{1,..., 8 \}, V \in B}$. Note that some of these equations are just $0=0$.
 
 # 5) Advanced usage
 
-For those who want to play with the code, test the code or to verify its correctness here is a more detailed explanation on how to use it and how it works.
+For those who want to play with the code, test the code, or verify its correctness, here is a more detailed explanation on how to use it and how it works.
 
-This code defines five classes (Field, Action, Monomial, Polynomal and Expression) in the programming language JavaScript (version ES6). Each of these classes give access to at least its '.value', its '.type' and its '.read' (which is an easy human readable version of its value) by using:
+This code defines five classes (Field, Action, Monomial, Polynomial and Expression) in the programming language JavaScript (version ES6). Each of these classes gives access to at least its '.value', its '.type' and its '.read' (which is an easy human readable version of its value) by using:
 
 `myElement.value`: gives the value that defines the element
 
-`myElement.type`: give a string that define its class as 'field', 'action', 'monomial', 'polynomial' or 'expression'
+`myElement.type`: gives a string that defines its class as 'field', 'action', 'monomial', 'polynomial' or 'expression'
 
-`myElement.read`: gives a humain readable string that represents the value of the object
+`myElement.read`: gives a human readable string that represents the value of the object
 
-Note that, unless it is specified, each method of each class do not change the content of the element on which it is applied, instead, it gives a new object as output.
+Note that, unless this is specified, each method of each class does not change the content of the element on which it is applied; instead, it gives a new object as output.
 
 #### 5.1 Define the class Field
 An element of this class is an element $k$ of the field $K$.
 
 **Initialization**: with non-empty string or nothing (default value is '1'): `myFieldElement = new Field(myString)`
 
-The element $0_K$ on $K$ is initialized with the string '0' and the element $1_K$ on $K$ is initialized with the string '1'.
+The element $0_K$ of $K$ is initialized with the string '0' and the element $1_K$ of $K$ is initialized with the string '1'.
 
 Supports internal **addition**, **product** and **nagative**:
 
@@ -202,7 +202,7 @@ console.log(k1.value)                 // k1 = -((mu2*((mu1*mu2)+(mu1*mu2))))
 
 #### 5.2 Define the class Action
 
-An element of this class is an element $a$ that defines an action on the algebra $A$, to use the notations of [1], the only possible elements are $b$, $b'$ and $b''$.
+An element of this class is an element $a$ that defines an action on the algebra $A$. In the notations of [1], the only possible elements are $b$, $b'$ and $b''$.
 
 **Initialization**: with a numeric element that is $1$, $2$ or $3$
 
@@ -212,20 +212,20 @@ Notation from the paper: $b => 1$,  $b' => 2$,  $b'' => 3$
 
 **Value**:`myActionElement.value` gives the number $1$, $2$ or $3$ that defines the value of the action element
 
-**Read**: `myActionElement.read` displays the string ' b ', ' b* ' or ' b** ' depending on the value of the action
+**Read**: `myActionElement.read` displays the string 'b', 'b\*' or 'b\*\*' depending on the value of the action
 
 **Usage**
 ```
 var action = new Action(2)  // initialize an action element
-console.log(action.value)   // 2  display the value of the action with 1, 2 or 3
-console.log(action.read)    // b* display the value of the action with 'b', 'b*' or 'b**'
+console.log(action.value)   // 2  display the value of the action by 1, 2 or 3
+console.log(action.read)    // b* display the value of the action by 'b', 'b*' or 'b**'
 ```
 
 #### 5.3 Define the class Monomial
 
 An element of this class is an element that defines a monomial in the algebra $A$.
 
-**Initialization**: with an object that possess properties `K`, `letter`, `ind` and `exp`. The value of `K` is an element of the class Field, that value of `letter` is a number among $1$, $2$, $3$ and $4$, the value of `ind` is an array of elements that are numbers among $1$, $2$ and $3$, the value of `exp` is an array of elements that are among the strings 'r' and 'l'. The lengths of the arrays `ind` and `exp` have to be the value of `letter` minus one. The `letter` value symbolize the notations of the article [1] as: $X => 1$, $Y => 2$, $Z => 3$ and $T => 4$.
+**Initialization**: with an object that possess properties `K`, `letter`, `ind` and `exp`. The value of `K` is an element of the class Field, the value of `letter` is a number among $1$, $2$, $3$ and $4$, the value of `ind` is an array of elements that are numbers among $1$, $2$ and $3$, the value of `exp` is an array of elements that are among the strings 'r' and 'l'. The lengths of the arrays `ind` and `exp` have to be the value of `letter` minus one. The `letter` value symbolize the notations of the article [1] as: $X => 1$, $Y => 2$, $Z => 3$ and $T => 4$.
 
 For example the monomial element $\mu_{1} Z^{1,3}\_{r,l}\in A$ with $\mu_{1} \in K$ can be initialized as:
 
