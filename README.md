@@ -144,7 +144,7 @@ and $e_8 = X \cdot ((b \cdot b') \cdot b'')$.
 
 Note that the expressions $e_5$, $e_6$, $e_7$ and $e_8$ have no meaning in the context of the algebra $A$ alone. However, they can be defined in an extended algebraic structure built on the top of $A$ (whose exact definition is given in [1]).
 
-Then, each of these expressions $e_i$ (for $i=1, ..., 8$) is expanded in two different ways by the use of the **identity** (exact formula of the identity in [1]) and the two expansions are transferred to the same side of the equality, so that we obtain a polynomial $P_i$ on $A$ that is equal to zero. The polynomial $P_i$ can be written as
+Then, each of these expressions $e_i$ (for $i=1, ..., 8$) is expanded in two different ways by the use of the **lambda/mu-rules** (see [1]) and the two expansions are transferred to the same side of the equality, so that we obtain a polynomial $P_i$ on $A$ that is equal to zero. The polynomial $P_i$ can be written as
 
 $P_i = \sum_{ V \in B} k_{(i, V)} V = 0$,
 
@@ -158,13 +158,13 @@ For those who want to play with the code, test the code, or verify its correctne
 
 This code defines five classes (Field, Action, Monomial, Polynomial and Expression) in the programming language JavaScript (version ES6). Each of these classes gives access to at least its '.value', its '.type' and its '.read' (which is an easy human readable version of its value) by using:
 
-`myElement.value`: gives the value that defines the element
+`myElement.value`: gives the value that defines the element;
 
-`myElement.type`: gives a string that defines its class as 'field', 'action', 'monomial', 'polynomial' or 'expression'
+`myElement.type`: gives a string that defines its class as 'field', 'action', 'monomial', 'polynomial' or 'expression';
 
-`myElement.read`: gives a human readable string that represents the value of the object
+`myElement.read`: gives a human readable string that represents the value of the object.
 
-Note that, unless this is specified, each method of each class does not change the content of the element on which it is applied; instead, it gives a new object as output.
+Note that, unless this is specified, each method of each class will not change the content of the object on which it is applied; instead, it gives a new object as output.
 
 #### 5.1 Define the class Field
 An element of this class is an element $k$ of the field $K$.
@@ -173,7 +173,7 @@ An element of this class is an element $k$ of the field $K$.
 
 The element $0_K$ of $K$ is initialized with the string '0' and the element $1_K$ of $K$ is initialized with the string '1'.
 
-Supports internal **addition**, **product** and **nagative**:
+Supports internal **addition**, **product** and **negative**:
 
 `Field.prototype.add(myFieldElement1, myFieldElement2)`
 
@@ -181,11 +181,11 @@ Supports internal **addition**, **product** and **nagative**:
 
 `Field.prototype.negative(myFieldElement)` or `myFieldElement.negative()`
 
-**Type**: `myFieldElement.type` gives the string 'field'
+**Type**: `myFieldElement.type` gives the string 'field';
 
-**Value**:`myFieldElement.value` gives a string that defines the value of the field element (which is a string composed of the symbols '(', ')', '+', '-', ' * ', '1', '0' and literal elements)
+**Value**:`myFieldElement.value` gives a string that defines the value of the field element (which is a string composed of the symbols '(', ')', '+', '-', ' * ', '1', '0' and literal elements);
 
-**Read**: `myFieldElement.read` in the case of field elements, this is equivalent to `myFieldElement.value`
+**Read**: `myFieldElement.read` in the case of field elements, this is equivalent to `myFieldElement.value`.
 
 **Usage**
 ```
@@ -206,13 +206,13 @@ An element of this class is an element $a$ that defines an action on the algebra
 
 **Initialization**: with a numeric element that is $1$, $2$ or $3$
 
-Notation from the paper: $b => 1$,  $b' => 2$,  $b'' => 3$
+Notation from the paper: $b$ => 1,  $b'$ => 2,  $b''$ => 3
 
-**Type**: `myActionsElement.type` gives the string 'action'
+**Type**: `myActionsElement.type` gives the string 'action';
 
-**Value**:`myActionElement.value` gives the number $1$, $2$ or $3$ that defines the value of the action element
+**Value**:`myActionElement.value` gives the number $1$, $2$ or $3$ that defines the value of the action element;
 
-**Read**: `myActionElement.read` displays the string 'b', 'b\*' or 'b\*\*' depending on the value of the action
+**Read**: `myActionElement.read` displays the string 'b', 'b\*' or 'b\*\*' depending on the value of the action.
 
 **Usage**
 ```
@@ -225,7 +225,7 @@ console.log(action.read)    // b* display the value of the action by 'b', 'b*' o
 
 An element of this class is an element that defines a monomial in the algebra $A$.
 
-**Initialization**: with an object that possess properties `K`, `letter`, `ind` and `exp`. The value of `K` is an element of the class Field, the value of `letter` is a number among $1$, $2$, $3$ and $4$, the value of `ind` is an array of elements that are numbers among $1$, $2$ and $3$, the value of `exp` is an array of elements that are among the strings 'r' and 'l'. The lengths of the arrays `ind` and `exp` have to be the value of `letter` minus one. The `letter` value symbolize the notations of the article [1] as: $X => 1$, $Y => 2$, $Z => 3$ and $T => 4$.
+**Initialization**: with an object that possess properties `K`, `letter`, `ind` and `exp`. The value of `K` is an element of the class Field, the value of `letter` is a number among $1$, $2$, $3$ and $4$, the value of `ind` is an array of elements that are numbers among $1$, $2$ and $3$, the value of `exp` is an array of elements that are among the strings 'r' and 'l'. The lengths of the arrays `ind` and `exp` have to be the value of `letter` minus one. The `letter` values symbolize the notations of the article [1] as follows: $X$ => 1, $Y$ => 2, $Z$ => 3 and $T$ => 4.
 
 For example the monomial element $\mu_{1} Z^{1,3}\_{r,l}\in A$ with $\mu_{1} \in K$ can be initialized as:
 
@@ -234,7 +234,7 @@ var k = new Field('mu1');
 var value = {K: k, letter: 3, ind: [1,3], exp: ['r', 'l']};
 var a = new Monomial(value);
 ```
-The value of the zero element $0_A$ of $A$ is by default equal to `{K: '0', letter: 1, ind: [], exp: []}`. Any different notation of the zero element $0_A \in A$ (as $Z^{1,1}\_{r,l}$) are send to this default representation each time the object changes its value or is initialized.
+The value of the zero element $0_A$ of $A$ is by default equal to `{K: '0', letter: 1, ind: [], exp: []}`. Any different notation of the zero element $0_A \in A$ (as for instance $Z^{1,1}\_{r,l}$) is sent to this default representation each time the object changes its value or is initialized.
 
 **Scalar multiplication by a field element**:
 
@@ -252,11 +252,11 @@ myMonomialElement.ind;
 myMonomialElement.exp;
 ```
 
-**Type**: `myMonomialElement.type` gives the string 'monomial'
+**Type**: `myMonomialElement.type` gives the string 'monomial'.
 
-**Value**:`myMonomialElement.value` is an object that contains properties `K`, `letter`, `ind` and `exp`
+**Value**:`myMonomialElement.value` is an object that contains properties `K`, `letter`, `ind` and `exp`.
 
-**Read**: `myMonomialElement.read` gives a human readable string representation of the monomial element. For example $\mu_{1} Z^{1,3}\_{r,l}$ will be represented as '(mu1) * Z13rl '
+**Read**: `myMonomialElement.read` gives a human readable string representation of the monomial element. For example, $\mu_{1} Z^{1,3}\_{r,l}$ will be represented as '(mu1) * Z13rl'
 
 **Base Vector**: The method `myMonomialElement.baseVector` gives a string that represents the base vector of the monomial. For examples $\mu_{1} Z^{1,3}\_{r,l}$ is represented by the string 'Z13rl'.
 
@@ -272,14 +272,14 @@ var X = Monomial prototype.x;
 ```
 var k1 = new Field('1');                      // create a new field element
 var k2 = new Field('mu');                     // create a new field element
-var action = new Action(3);                   // Initialize an action element
+var action = new Action(3);                   // initialize an action element
 var value = {                                 // this kind of objects is used to initialize monomial element
-    K: k1,                                    // must contain a field element in .K
+    K: k1,                                    // must contain a field element in K
     letter: 3,                                // must contain a numeric element of 1, 2 , 3 or 4 in .letter (X => 1, Y => 2, Z => 3, T => 4)
     ind: ['r','r'],                           // must contain an array of string 'l' or 'r' in .ind ('l' for left and 'r' for right)
     exp: [1,2]                                // must contain an array of integers between 1, 2 and 3 in .exp
 };
-var a = new Monomial(value);                  // Initialize a monomial element
+var a = new Monomial(value);                  // initialize a monomial element
 
 
 console.log(a.read)                         // Z12rr     display the value of the monomial
@@ -302,7 +302,7 @@ An element of this class is an element that defines a polynomial (can be a monom
 
 **Type**: `myPolynomialElement.type` gives the string 'polynomial'
 
-**Value**:`myPolynomialElement.value` is a map that maps the string that represent the base vector of a monomial (for example 'Z12rl') to the value of the monomial in this base vector.
+**Value**:`myPolynomialElement.value` is a map that maps the string that represents the base vector of a monomial (for example 'Z12rl') to the value of the monomial in this base vector.
 
 **Read**: `myPolynomialElement.read` output an easy readable string that represents the polynomial element
 
@@ -325,10 +325,10 @@ The class Expression is made to carry the algebraic expressions that will lead t
 **Initialization**:
 The expressions that are acceptable in the class Expression are:
 
-- Degree 3: Any expression that can be obtained by commuting the expression $(X_1 \cdot a_1)\cdot a_2$ where $X_1$ is a monomial of the algebra $A$ and $a_1$ and $a_2$ are actions.
-- Degree 4: Any expression that can be obtained by commputing the expression $((a_1 \cdot a_2) \cdot a_3) \cdot X_1$ where $X_1$ is a monomial of the algebra $A$ and $a_1$, $a_2$ and $a_3$ are actions.
+- Degree 3: Any expression that can be obtained by computing the expression $(X_1 \cdot a_1)\cdot a_2$ where $X_1$ is a monomial of the algebra $A$ and $a_1$ and $a_2$ are actions.
+- Degree 4: Any expression that can be obtained by computing the expression $((a_1 \cdot a_2) \cdot a_3) \cdot X_1$ where $X_1$ is a monomial of the algebra $A$ and $a_1$, $a_2$ and $a_3$ are actions.
 
-It can be initialized with degree 3 or degree 4 algebraic expressions as `[[X, a1], a2]` where `X` is a Monomial element, and `a1` and `a2` are Action elements. The order of the operations is defined by how the arrays of objects are nested.
+It can be initialized with degree 3 or degree 4 algebraic expressions such as `[[X, a1], a2]` where `X` is a Monomial element, and `a1` and `a2` are Action elements. The order of the operations is defined by how the arrays of objects are nested.
 
 For example we can initialize an expression element $((b \cdot b') \cdot b'') \cdot (\mu_{1}X) $ as:
 
@@ -339,19 +339,19 @@ var myExpression = new Expression([[[a1, a2], a3], X]);
 ```
 
 **Equations**:
-Given an expression object (of degree 3 or 4), this method expands it in the way that is described in the article [1] to obtain a system of equations on $K$ that vanishes. The output is a polynomial object $P$ that has to be equal to zero in $A$, which means that the field coefficients of each base vector of $P$ are equal to zero in $K$.
+Given an expression object (of degree 3 or 4), this method expands it in the way that is described in the article [1] to obtain a system of polynomials on $K$ that vanish. The output is a polynomial object $P$ that has to be equal to zero in $A$, which means that the field coefficients of each base vector of $P$ are equal to zero in $K$.
 
 `
 myExpression.equations();
 `
 
-**Degree**: `myExpression.degree` gives 3 or 4 that represents the number of factors in the expression
+**Degree**: `myExpression.degree` gives 3 or 4 that represents the number of factors in the expression;
 
-**Type**: `myExpression.type` gives the string 'expression'
+**Type**: `myExpression.type` gives the string 'expression';
 
-**Value**: `myExpression.value` is nested arrays of objects containing Monomial or Action objects
+**Value**: `myExpression.value` is nested arrays of objects containing Monomial or Action objects;
 
-**Read**: `myExpression.read` give a human readable string that represents the expression
+**Read**: `myExpression.read` give a human readable string that represents the expression.
 
 **Product**:
 Remark: this method can be applied on any nested arrays of Monomial, Field and Action objects, not only on the particular case of class Expression objects.
@@ -361,27 +361,27 @@ Recursive function that solves any possible combinations on products that are am
 Expression.prototype.product([k1,[[k2, b2, X], b1]]);  
 ```
 
-Note however that direct products on two Action elements and on two Monomial elements are not defined and so the output is an error.
+Note however that products of two Action elements or two Monomial elements are not defined and so the output is an error.
 
-**Identity**:
+**lambda/mu-rules**:
 Remark: this method can be applied to any object of the form `[X,[Y,Z]]` or `[[X,Y],Z]` where `X`, `Y` and `Z` are any JS objects.
 
 For ` Expression.prototype.identity([[X,Y],Z])`, output is `[[mu1, exp1], ..., [m8, exp8]]`.
 For ` Expression.prototype.identity([X,[Y,Z]])`, output is ` [[lambda1, exp1], ..., [lambda8, exp8]]`.
 
-Where `mu1`, ..., `mu8`, `lambda1`, ..., `lambda8` are Field elements with values 'mu1', ..., 'lambda8'. And `exp1` to `exp8` are different rearrangement  of `X`, `Y` and `Z` as defined by the **identity** in [1]. So the main array of the output represents a sum.
+Where `mu1`, ..., `mu8`, `lambda1`, ..., `lambda8` are Field elements with values 'mu1', ..., 'lambda8'. Furthermore, `exp1` to `exp8` are different rearrangements  of `X`, `Y` and `Z` as defined by the **lambda/mu-rules** of [1]. So the main array of the output represents a sum.
 
 We can add to the method '.identity()' a second argument of the class Field, this one will multiply by distribution the Field elements  `mu1`, ..., `mu8`, `lambda1`, ..., `lambda8`.
 
-**Left and Right Expantions**:
+**Left and Right Expansions**:
 Remark: this method applies only on Expression class objects.
 The code
 ```
 myExpression.leftExpansion();
 myExpression.rightExpansion();
 ```
-Will expand the expression object with the method described in [1]. So it first tracks if the expression is of degree 3 or 4 and then applies the right method (depending on if the expression is of degree 3 or 4 and if the expansion if left or right).
-The output is a Polynomial class object that is equal to zero on $A$ obtained from this expression.
+will expand the expression object with the method described in [1]. So it first checks whether the expression is of degree 3 or 4, and then applies the right method (depending on whether the expression is of degree 3 or 4 and whether the expansion is left or right).
+The output is a Polynomial class object that is equal to zero on $A$, obtained from this expression.
 
 **Equations**:
 Remark: this method applies only on Expression class objects.
@@ -389,7 +389,7 @@ The code
 ```
 myExpression.equations();
 ```
-computes the polynomials $P_1$ from `myExpression.leftExpansion()` and $P_2$ from `myExpression.rightExpantion() `, then computes the polynomial $P = P_1 - P_2$. So $P = 0$ provides us the result we want.
+computes the polynomials $P_1$ from `myExpression.leftExpansion()` and $P_2$ from `myExpression.rightExpansion() `, then computes the polynomial $P = P_1 - P_2$. So $P = 0$ is the equation we want.
 
 **Usage**
 ```
@@ -397,7 +397,7 @@ var X = new Monomial({ K: new Field('1'), letter: 1, ind: [], exp: []});        
 var a1 = new Action(1), a2 = new Action(2), a3 = new Action(3);                 // initialize 3 actions elements
 var exp1 = new Expression([[a1, X], a2])                                        // initialize an expression of degree 3
 var exp2 = new Expression([[[a1, a2], a3], X])                                  // initialize an expression of degree 4
-var p = exp1.equations()                                                        // compute the equations on K that emerges from this expresion
+var p = exp1.equations()                                                        // compute the equation on K that emerges from this expression
 console.log(p.read)
 ```
 
@@ -405,7 +405,7 @@ console.log(p.read)
 
 To obtain the wanted equations from the article [1], we first define some basic objects.
 ```
-// Initialize X (a monomial in the Algebra) and actions b, b* and b** ----------------------------------------------
+// Initialize X (a monomial in the algebra) and actions b, b* and b** ----------------------------------------------
 var X = new Monomial({K: new Field('1'), letter: 1, ind: [], exp: []});
 var a1 = new Action(1), a2 = new Action(2), a3 = new Action(3);
 
@@ -425,7 +425,7 @@ Then, we compute the result with
 ```
 var results = {};
 expressions.forEach(d =>{
-    let zeroPolynomialP = d.equations();        // compute the polynomial equation P = 0 that arise from this expression
+    let zeroPolynomialP = d.equations();        // compute the polynomial equation P = 0 that arises from this expression
     let exp = d.read();                         // determine a string that represents the initial expression
     results[exp] = {};
     zeroPolynomialP.value.forEach((v,k) => {
