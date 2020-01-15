@@ -1,44 +1,43 @@
-**Please read carefully parts (1), (2) and (3) to use this code. Parts (4) and (5) are for more detailed explanations.**
+**Please read carefully parts (1), (2) and (3) to use this code. Parts (4) and (5) contain more detailed explanations.**
 
 # 1) Introduction
 
-In the article [1]:
+In the article
 
-**X. García-Martínez, M. Tsishyn, T. Van der Linden and C. Vienne, A characterisation of Lie algebras via action representability**
+**[1] X. García-Martínez, M. Tsishyn, T. Van der Linden and C. Vienne, A characterisation of Lie algebras via action representability**
 
-we have encountered the need to determine a system of equations that is used to complete our proof. The computations required to arrive to this system of equations are, in a certain extent, repetitive and long enough to convince us that the best way to compute the equations is by the use of a computer.
+we have encountered the need to determine a system of equations that is used to complete the proof of one of the main results. The inconsistency of this system proves that the result is valid. The computations required to arrive to this system of equations are, in a certain extent, repetitive and long enough to convince us that the best way to compute the equations is by the use of a computer.
 
-So, the **purpose** of this project is to **generate the system of equations used in [1]**. This project is written is a such way that any person is able to replicate our computations and verify the correctness of this code. We also did our best to make the code, or at least its usage, understandable for peoples that are not used to programming.
+So, the **purpose** of this project is to **generate the system of equations used in [1]**. This project is written is a such way that any person is able to replicate our computations and verify the correctness of this code. We also did our best to make the code, or at least its usage, understandable also for those who are less familiar with programming.
 
 #### 1.1) Choice of the language
 
-This project is written in **JavaScript**, version 6 (**ES6**). JavaScript may not be a usual choice for this kind of algebraic computations. Languages such as Wolfram Mathematica are more adapted to manipulate, for example, equations with literal elements. However we choose to us JavaScript for the two following reasons:
-- The algebraic structures we have to manipulate are very specific to this article, and we wanted to keep full control on what exactly the code is doing to be completely sure of the result.
-- The use of JavaScript allow the code to be replicable without any requirement for a license.
+This project is written in **JavaScript**, version 6 (**ES6**). JavaScript may not be the usual choice for this kind of algebraic computations. Languages such as Wolfram Mathematica are more adapted to symbolic manipulation of systems of equations. However we choose to us JavaScript for the two following reasons:
+- the algebraic structures we have to manipulate are very specific to this article, and we wanted to keep full control on what exactly the code is doing, to be completely sure of the result;
+- the use of JavaScript allows anyone to test the code: no need for a license.
 
 #### 1.2) Disclaimer
 
-The purpose of this code is to generate specific type of equations obtained from a specific type of expressions on specific algebraic structures (as described in the article [1]). So, there is absolutely no guarantee that it will give correct results in any other context. Knowing that, this code should not be used for any other purpose that the generation of equations in the context of the article [1] unless the user is totally aware of what she/he is doing.
+The purpose of this code is to generate a specific type of equations obtained from a specific type of expressions on specific algebraic structures (as described in the article [1]). So, there is absolutely no guarantee that it will give correct results in any other context. Knowing that, this code should not be used for any other purpose than the generation of equations in the context of the article [1], save by users who are totally aware of what they are doing.
 
 # 2) How to use
 
-In (2.1), we explain how a user can execute the code in tree different ways:
-  - In an online JavaScript editor
-  - By executing a JavaScript project locally on your computer with Node (classical way to execute JS files)
-  - By an interactive way with Jupyter Notebook
+In (2.1), we explain two ways this code can be run:
+  - in an on-line JavaScript editor;
+  - by executing a JavaScript project locally on your computer with Node, a classical way to execute JS files.
 
-This first part do not requires any modifications of the code files.
+This first option does not require any modifications of the code files. In the second case, some lines must be uncommented, in order to choose the way the output is presented.
 
-In (2.2), we explain how this code can be executed to obtain the equations. So the user can by itself obtain the equations she/he wants by modifying or adding lines of code in the right place.
+In (2.2), we explain how the code can be used to obtain the set of equations in question. Furthermore, users can themselves obtain the equations they want by modifying or adding lines of code in the right place.
 
 #### 2.1) How to run
 
-We adapted the same code for tree different environments so that the user can choose which of the tree ways of execution she/he prefers depending on its experience (or absence of experience) of JavaScript.
+We adapted the code to two different environments.
 
 **2.1.1) Online execution**
 
   The simplest way:
-  Without any required installation on your computer, you can simply copy and paste the content of the file 'JScode.txt' (folder './online-execution/') in any JavaScript online editor (such as 'https://playcode.io/online-javascript-editor'). Then, the system of equations will be displayed in the terminal.
+  Without any required installation on your computer, you can simply copy and paste the content of the file 'JScode.txt' (folder './online-execution/') in any JavaScript on-line editor (such as for instance 'https://playcode.io/online-javascript-editor'). Then, the system of equations will be displayed in the terminal.
 
 **2.1.2) Execution in Node.js**
 
@@ -48,28 +47,23 @@ We adapted the same code for tree different environments so that the user can ch
   - The file 'usage.js' shows how to use the code from 'script.js'
   - The file 'results.js' defined the eight expressions $e_1, ..., e_8$ and uses 'script.js' to obtain the wanted system of expressions.
 
-  To obtain the results just execute the file 'results.js' with the command line in the folder './script-for-node/'.
+  To obtain the results, first uncomment the relevant lines in the file 'results.js', then execute it in the folder './script-for-node/', using the command line as follows.
   ```
   node results.js
   ```
-**2.1.3) Execution in a Jupyter Notebook**
 
-  For Jupyter Notebook users, the most interactive way:
-  By using Jupyter Notebook, you can execute and play with the code in an interactive way and observe the obtained outputs on each step. This is certainly the most efficient way to investigate the code, but it requires some installation on your computer. You should have installed **Node.js**, **Jupyter Notebook** (with Anaconda) and a **JavaScript kernel for Jupyter** (it makes the link between Jupyter Notebook and Node). After that you can just play with the 'Jupyter-Notebook.ipynb' file.
+#### 2.2) How the system of equations is obtained
 
-#### 2.2) How to use
+Once it is clear how to execute the code, here is a short explanation of the part that leads to the system of equations in question. This code is found in the following place:
 
-Once you can execute the code, here is how to use it by adding new lines of code in the right place:
-
-- With (2.1.1): In the end of the text document './online-execution/JScode.txt'
-- With (2.1.2): In the file './script-for-node/results.js'
-- With (2.1.3): In the end of the Jupyter Notebook
+- with (2.1.1): at the end of the text document './online-execution/JScode.txt';
+- with (2.1.2): in the file './script-for-node/results.js'.
 
 First, you have to define `k` the unit on the field $K$.
 ```
 const k = new Field('1');
 ```
-Then, define `a1`, `a2` and `a3` as the tree element $b$, $b'$ and $b''$ that acts on $A$.
+Then, define `a1`, `a2` and `a3` as the three elements $b$, $b'$ and $b''$ that act on $A$.
 ```
 const a1 = new Action(1), a2 = new Action(2), a3 = new Action(3);
 ```
@@ -96,35 +90,38 @@ polynomial.value.forEach( v => {
 });
 ```
 
-More detailed usage of the code is shown in './script-for-node/usage.js' or in the part (5).
+More detailed usage of the code is shown in './script-for-node/usage.js' or in part (5).
 
 
 # 3) Results
 The folder './results/' contains two files:
-- 'results.txt': is a text file which lines represent the equations on $K$ that are equal to zero obtained from the eight expressions $e_1, ..., e_8$.
+- 'results.txt': is a text file whose lines represent the equations on $K$ that are equal to zero obtained from the eight expressions $e_1$, ..., $e_8$.
 - 'results.json' is a JSON file (JavaScript Object Notations) which is an object that gives all the equations and also the information of from which expression it comes and of which base vector it is the coefficient.
 
 # 4) A brief explanation of the theoretical context
 
- A complete and rigorous theoretical context of this code is explained in [1]. However, let us take some lines to explain the main idea of what the code computes from a more theoretical point of view.
+A complete and rigorous theoretical context of this code is explained in [1]. However, let us take some lines to explain the main idea of what the code computes from a more theoretical point of view.
 
 #### 4.1) Notations and definitions of algebraic structures
 
 Let us consider a field $K$ and an algebra $A$ over $K$.
 A basis of $A$ is defined as,  
 
-$B = \{ X, Y^{i}_{p_1}, Z^{j,k}_{p_2, p_3}, T^{l,m,n}_{p_4, p_5, p_6} \}$,
+$B = \{ X, Y^{i}\_{p_1}, Z^{j,k}\_{p_2, p_3}, T^{l,m,n}\_{p_4, p_5, p_6} \}$, 
 
-where $p_1, ..., p_6$ are in the set $\{ left, right \}$ and $i,j,k,l,m,n$ are in the set $\{ 1,2,3 \}$. Moreover, if $j = k$, the element $Z^{i,k}_{p_2, p_3}$ is zero and if $l$, $m$ and $n$ are not two by two different, the element $T^{l,m,n}_{p_4, p_5, p_6}$ is also zero.
+where $p_1, ..., p_6$ are in the set $\{ left, right \}$ and $i,j,k,l,m,n$ are in the set $\{ 1,2,3 \}$. Moreover, if $j = k$, the element $Z^{i,k}\_{p_2, p_3}$ is zero and if $l$, $m$ and $n$ are not two by two different, the element $T^{l,m,n}\_{p_4, p_5, p_6}$ is also zero.
 
 Now, we define an action of tree elements $b$, $b'$ and $b''$ (alternatively denoted as $b_1$, $b_2$ and $b_3$) on $A$ as $\{b, b', b''\} \times A \rightarrow A$ such that,
 
-$ b_t \cdot X = Y^{t}_{left} $
-$ b_t \cdot Y^{j}_{p_1} = Z^{j,t}_{p_1, left} $
-$ b_t \cdot Z^{j,k}_{p_2, p_3} = T^{j,k,t}_{p_2,p_3, left} $
-$ b_t \cdot T^{l,m,n}_{p_4, p_5, p_6} = 0$
+$b_t \cdot X = Y^{t}\_{left} $
 
-for any $t$, $i$, $j$, $k$, $l$, $m$, $n$ in $\{1,2,3 \}$ and $p_1$, $p_2$, $p_3$, $p_4$, $p_5$, $p_6$ in $\{ left, rigth \}$ and the same equations holds for right actions but with the new index coefficient as $right$ instead of $left$.
+$b_t \cdot Y^{j}\_{p_1} = Z^{j,t}\_{p_1, left} $
+
+$b_t \cdot Z^{j,k}\_{p_2, p_3} = T^{j,k,t}\_{p_2,p_3, left} $
+
+$b_t \cdot T^{l,m,n}\_{p_4, p_5, p_6} = 0$
+
+for any $t$, $i$, $j$, $k$, $l$, $m$, $n$ in $\{1,2,3 \}$ and $p_1$, $p_2$, $p_3$, $p_4$, $p_5$, $p_6$ in $\{ left, right \}$ and the same equations holds for right actions but with the new index coefficient as $right$ instead of $left$.
 
 #### 4.2) Method to find the equations
 
@@ -153,9 +150,9 @@ $P_i = \sum_{ V \in B} k_{(i, V)} V $ = 0,
 
 where $k_{(i,V)}$ are in $K$ and V are the elements of the basis $B$.
 
-So, we can conclude that the system of equations on $K$,  $\{ k_{(i,V)} \}_{i \in \{1,..., 8 \}, V \in B}$ is equal to zero (note that some of these equations are just $0=0$).
+So, we can conclude that the system of equations on $K$,  $\{ k_{(i,V)} \}\_{i \in \{1,..., 8 \}, V \in B}$ is equal to zero (note that some of these equations are just $0=0$).
 
-# 5) Advenced usage
+# 5) Advanced usage
 
 For those who want to play with the code, test the code or to verify its correctness here is a more detailed explanation on how to use it and how it works.
 
@@ -230,14 +227,14 @@ An element of this class is an element that defines a monomial in the algebra $A
 
 **Initialization**: with an object that possess properties `K`, `letter`, `ind` and `exp`. The value of `K` is an element of the class Field, that value of `letter` is a number among $1$, $2$, $3$ and $4$, the value of `ind` is an array of elements that are numbers among $1$, $2$ and $3$, the value of `exp` is an array of elements that are among the strings 'r' and 'l'. The lengths of the arrays `ind` and `exp` have to be the value of `letter` minus one. The `letter` value symbolize the notations of the article [1] as: $X => 1$, $Y => 2$, $Z => 3$ and $T => 4$.
 
-For example the monomial element $\mu_{1} Z^{1,3}_{r,l}\in A$ with $\mu_{1} \in K$ can be initialized as:
+For example the monomial element $\mu_{1} Z^{1,3}\_{r,l}\in A$ with $\mu_{1} \in K$ can be initialized as:
 
 ```
 var k = new Field('mu1');
 var value = {K: k, letter: 3, ind: [1,3], exp: ['r', 'l']};
 var a = new Monomial(value);
 ```
-The value of the zero element $0_A$ of $A$ is by default equal to `{K: '0', letter: 1, ind: [], exp: []}`. Any different notation of the zero element $0_A \in A$ (as $Z^{1,1}_{r,l}$) are send to this default representation each time the object changes its value or is initialized.
+The value of the zero element $0_A$ of $A$ is by default equal to `{K: '0', letter: 1, ind: [], exp: []}`. Any different notation of the zero element $0_A \in A$ (as $Z^{1,1}\_{r,l}$) are send to this default representation each time the object changes its value or is initialized.
 
 **Scalar multiplication by a field element**:
 
@@ -259,11 +256,11 @@ myMonomialElement.exp;
 
 **Value**:`myMonomialElement.value` is an object that contains properties `K`, `letter`, `ind` and `exp`
 
-**Read**: `myMonomialElement.read` gives a human readable string representation of the monomial element. For example $\mu_{1} Z^{1,3}_{r,l}$ will be represented as '(mu1) * Z13rl '
+**Read**: `myMonomialElement.read` gives a human readable string representation of the monomial element. For example $\mu_{1} Z^{1,3}\_{r,l}$ will be represented as '(mu1) * Z13rl '
 
-**Base Vector**: The method `myMonomialElement.baseVector` gives a string that represents the base vector of the monomial. For examples $\mu_{1} Z^{1,3}_{r,l}$ is represented by the string 'Z13rl'.
+**Base Vector**: The method `myMonomialElement.baseVector` gives a string that represents the base vector of the monomial. For examples $\mu_{1} Z^{1,3}\_{r,l}$ is represented by the string 'Z13rl'.
 
-**Read expression**: `myMonomialElement.readExpression` gives a string that represents how the base vector of the monomial is obtained by actions on the element $X \in A$. For exmaple, $\mu_{1} Z^{1,3}_{r,l}$ will be represented as  '(b**(Xb))'.
+**Read expression**: `myMonomialElement.readExpression` gives a string that represents how the base vector of the monomial is obtained by actions on the element $X \in A$. For example, $\mu_{1} Z^{1,3}\_{r,l}$ will be represented as  '(b\*\*(Xb))'.
 
 **Default Values**: We can access the element $O_A$ and $X$ from the algebra $A$ with
 ```
@@ -359,7 +356,7 @@ myExpression.equations();
 **Product**:
 Remark: this method can be applied on any nested arrays of Monomial, Field and Action objects, not only on the particular case of class Expression objects.
 
-Recursive function that solves any possible combinations on products that are among scalar multiplication on $A$ with $K$, action on $A$ and internal product on $K$. For example we can compute that $(k_1 \cdot ((k_2 \cdot b' \cdot X) \cdot b))$ with $k_1$ and $k_2$ in $K$ is equal to $(k_1 \cdot k_2) \cdot Z^{2,1}_{l,r}$ with:
+Recursive function that solves any possible combinations on products that are among scalar multiplication on $A$ with $K$, action on $A$ and internal product on $K$. For example we can compute that $(k_1 \cdot ((k_2 \cdot b' \cdot X) \cdot b))$ with $k_1$ and $k_2$ in $K$ is equal to $(k_1 \cdot k_2) \cdot Z^{2,1}\_{l,r}$ with:
 ```
 Expression.prototype.product([k1,[[k2, b2, X], b1]]);  
 ```
