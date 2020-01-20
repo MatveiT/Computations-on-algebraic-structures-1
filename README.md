@@ -4,7 +4,7 @@
 
 In the article
 
-**[1] X. García-Martínez, M. Tsishyn, T. Van der Linden and C. Vienne, A characterisation of Lie algebras via action representability**
+**[1] X. García-Martínez, M. Tsishyn, T. Van der Linden and C. Vienne, Algebras with representable representations**
 
 we have encountered the need to determine a system of equations that is used to complete the proof of one of the main results. The inconsistency of this system proves that the result is valid. The computations required to arrive to this system of equations are, in a certain extent, repetitive and long enough to convince us that the best way to obtain the equations is by the use of a computer.
 
